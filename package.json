@@ -2,7 +2,6 @@
   "name": "generator-vueui",
   "version": "0.0.1",
   "description": "a scaffold generator for vue ui component",
-  "main": "index.js",
   "scripts": {
     "test": "jest",
     "pretest": "eslint . --fix",
