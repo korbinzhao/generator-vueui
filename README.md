@@ -5,11 +5,11 @@ a scaffold generator for vue ui component
 
 ```
 npm install -g yo
-npm install -g generator-vueuicomponent
+npm install -g generator-vueui
 
 mkdir vueui-examples
 cd vueui-examples
 
-yo vueuicomponent
+yo vueui
 
 ```

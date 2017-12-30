@@ -1,5 +1,5 @@
 {
-  "name": "generator-vueuicomponent",
+  "name": "generator-vueui",
   "version": "0.0.1",
   "description": "a scaffold generator for vue ui component",
   "main": "index.js",
