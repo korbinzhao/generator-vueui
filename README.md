@@ -7,8 +7,8 @@ a scaffold generator for vue ui component
 npm install -g yo
 npm install -g generator-vueui
 
-mkdir vueui-examples
-cd vueui-examples
+mkdir vueui-example
+cd vueui-example
 
 yo vueui
 
