@@ -1,8 +1,17 @@
 {
   "name": "generator-vueui",
   "version": "0.0.1",
-  "description": "vue ui 组件脚手架",
-  "author": "korbinzhao",
+  "description": "a scaffold generator for vue ui component",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "pretest": "eslint . --fix",
+    "prepublish": "nsp check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/korbinzhao/generator-vueui.git"
+  },
   "files": [
     "app"
   ],
@@ -15,12 +24,6 @@
     "create",
     "boilerplate"
   ],
-  "repository": "",
-  "scripts": {
-    "test": "jest",
-    "pretest": "eslint . --fix",
-    "prepublish": "nsp check"
-  },
   "engines": {
     "node": ">=4.0.0"
   },
@@ -50,5 +53,10 @@
       "templates"
     ]
   },
-  "license": "MIT"
+  "author": "korbinzhao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/korbinzhao/generator-vueui/issues"
+  },
+  "homepage": "https://github.com/korbinzhao/generator-vueui#readme"
 }
