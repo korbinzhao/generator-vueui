@@ -1,6 +1,6 @@
 {
   "name": "generator-vueui",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "a scaffold generator for vue ui component",
   "scripts": {
     "test": "jest",

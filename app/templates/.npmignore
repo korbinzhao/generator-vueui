@@ -1,10 +1,1 @@
-static/
 node_modules/
-demo/
-config/
-build/
-src/
-
-.gitignore
-.postcssrc.js
-.babelrc
