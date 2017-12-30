@@ -5,8 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "pretest": "eslint . --fix",
-    "prepublish": "nsp check"
+    "pretest": "eslint . --fix"
   },
   "repository": {
     "type": "git",
