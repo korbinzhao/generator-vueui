@@ -43,7 +43,6 @@ describe('generator:app', () => {
 
     it('fills package.json with correct information', () => {
       assert.JSONFileContent('package.json', { // eslint-disable-line new-cap
-        name: 'generator-temp',
         dependencies: {
           'yeoman-generator': generatorGeneratorPkg.dependencies['yeoman-generator'],
           chalk: generatorGeneratorPkg.dependencies.chalk,
@@ -57,16 +56,16 @@ describe('generator:app', () => {
       });
     });
 
-    it('fills the README with project data', () => {
-      assert.fileContent('README.md', '# generator-temp');
-      assert.fileContent('README.md', 'npm install -g yo');
-      assert.fileContent('README.md', 'npm install -g generator-temp');
-      assert.fileContent('README.md', 'yo temp');
-      assert.fileContent('README.md', 'yeoman/generator-temp');
-    });
+    // It('fills the README with project data', () => {
+    //   assert.fileContent('README.md', '# generator-temp');
+    //   assert.fileContent('README.md', 'npm install -g yo');
+    //   assert.fileContent('README.md', 'npm install -g generator-temp');
+    //   assert.fileContent('README.md', 'yo temp');
+    //   assert.fileContent('README.md', 'yeoman/generator-temp');
+    // });
 
-    it('fills the .eslintignore with correct content', () => {
-      assert.fileContent('.eslintignore', '**/templates\n');
-    });
+    // It('fills the .eslintignore with correct content', () => {
+    //   assert.fileContent('.eslintignore', '**/templates\n');
+    // });
   });
 });

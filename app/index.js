@@ -1,93 +1,61 @@
 'use strict';
 const path = require('path');
 const Generator = require('yeoman-generator');
-const askName = require('inquirer-npm-name');
-const _ = require('lodash');
-const extend = require('deep-extend');
-const mkdirp = require('mkdirp');
-
-function makeGeneratorName(name) {
-  name = _.kebabCase(name);
-  name = name.indexOf('generator-') === 0 ? name : 'generator-' + name;
-  return name;
-}
 
 module.exports = class extends Generator {
-  initializing() {
-    this.props = {};
+  // Note: arguments and options should be defined in the constructor.
+  constructor(args, opts) {
+    super(args, opts);
+
+    this.argument('project', {
+      type: String,
+      required: false
+    });
+
+    this.name = path.basename(process.cwd());
   }
 
   prompting() {
-    return askName({
-      name: 'name',
-      message: 'Your generator name',
-      default: makeGeneratorName(path.basename(process.cwd())),
-      filter: makeGeneratorName,
-      validate: str => {
-        return str.length > 'generator-'.length;
-      }
-    }, this).then(props => {
-      this.props.name = props.name;
-    });
-  }
+    return this.prompt([{
+      type: 'input',
+      name: 'project',
+      message: 'Your project name',
+      default: this.name
+    }, {
+      type: 'input',
+      name: 'user',
+      message: 'Your name',
+      default: 'yourname'
+    }, {
+      type: 'input',
+      name: 'email',
+      message: 'Your email',
+      default: 'youremail'
+    }]).then(answers => {
+      this.project = answers.project || this.options.project;
+      this.user = answers.user;
+      this.email = answers.email;
 
-  default() {
-    if (path.basename(this.destinationPath()) !== this.props.name) {
-      this.log(
-        'Your generator must be inside a folder named ' + this.props.name + '\n' +
-        'I\'ll automatically create this folder.'
-      );
-      mkdirp(this.props.name);
-      this.destinationRoot(this.destinationPath(this.props.name));
-    }
-
-    const readmeTpl = _.template(this.fs.read(this.templatePath('README.md')));
-
-    this.composeWith(require.resolve('generator-node/generators/app'), {
-      boilerplate: false,
-      name: this.props.name,
-      projectRoot: 'generators',
-      skipInstall: this.options.skipInstall,
-      readme: readmeTpl({
-        generatorName: this.props.name,
-        yoName: this.props.name.replace('generator-', '')
-      })
-    });
-
-    this.composeWith(require.resolve('../subgenerator'), {
-      arguments: ['app']
+      this.log('project', this.project);
+      this.log('user', this.user);
+      this.log('email', this.email);
     });
   }
 
   writing() {
-    const pkg = this.fs.readJSON(this.destinationPath('package.json'), {});
-    const generatorGeneratorPkg = require('../package.json');
+    this.fs.copyTpl(
+      this.templatePath('./'),
+      this.destinationPath('./'), {
+        project: this.project,
+        user: this.user,
+        email: this.email
+      }, {
 
-    extend(pkg, {
-      dependencies: {
-        'yeoman-generator': generatorGeneratorPkg.dependencies['yeoman-generator'],
-        chalk: generatorGeneratorPkg.dependencies.chalk,
-        yosay: generatorGeneratorPkg.dependencies.yosay
-      },
-      devDependencies: {
-        'yeoman-test': generatorGeneratorPkg.devDependencies['yeoman-test'],
-        'yeoman-assert': generatorGeneratorPkg.devDependencies['yeoman-assert']
-      },
-      jest: {
-        testPathIgnorePatterns: ['templates']
+      }, {
+        globOptions: {
+          dot: true
+        }
       }
-    });
-    pkg.keywords = pkg.keywords || [];
-    pkg.keywords.push('yeoman-generator');
-
-    this.fs.writeJSON(this.destinationPath('package.json'), pkg);
-  }
-
-  conflicts() {
-    this.fs.append(this.destinationPath('.eslintignore'), '**/templates\n');
-  }
-
-  install() {
-    this.installDependencies({bower: false});
+    );
   }
 };
