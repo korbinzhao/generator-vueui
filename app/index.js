@@ -31,14 +31,23 @@ module.exports = class extends Generator {
       name: 'email',
       message: 'Your email',
       default: 'youremail'
+    }, {
+      type: 'input',
+      name: 'description',
+      message: 'description',
+      default: 'A Vue.js project'
     }]).then(answers => {
       this.project = answers.project || this.options.project;
       this.user = answers.user;
       this.email = answers.email;
+      this.description = answers.description;
 
       this.log('project', this.project);
       this.log('user', this.user);
       this.log('email', this.email);
+      this.log('description', this.description);
+
+      
     });
   }
 
@@ -48,7 +57,8 @@ module.exports = class extends Generator {
       this.destinationPath('./'), {
         project: this.project,
         user: this.user,
-        email: this.email
+        email: this.email,
+        description: this.description
       }, {
 
       }, {
