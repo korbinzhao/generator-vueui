@@ -1,4 +1,4 @@
-<style scoped>
+<style scoped lang="scss">
 </style>
 <template>
   <div>demo-component</div>

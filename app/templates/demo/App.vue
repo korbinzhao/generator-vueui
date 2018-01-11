@@ -1,7 +1,7 @@
 <style scoped>
 </style>
 <template>
-  <demo-component/>
+  <DemoComponent/>
 </template>
 <script>
 import { DemoComponent } from "../src/index";
